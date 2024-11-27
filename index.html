@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prenota Ora 3D Text Art</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;800&family=Cinzel:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: radial-gradient(circle, #0b0f3a, #151932);
+      overflow: hidden;
+      font-family: 'Raleway', sans-serif;
+      color: #fff;
+    }
+
+    .container {
+      text-align: center;
+      perspective: 1500px;
+    }
+
+    .logo-container {
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.5));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 6px 15px rgba(255, 255, 255, 0.7));
+    }
+
+    .text-art {
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate 20s infinite linear;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: 7rem;
+      color: transparent;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffcc00, #ff4700, #e5b240, #ffcc00);
+      -webkit-background-clip: text;
+      text-shadow: 0px 6px 10px rgba(255, 71, 0, 0.6), 0 0 30px rgba(255, 204, 0, 0.8);
+      transform: translateZ(100px) rotateX(10deg) rotateY(-10deg);
+      filter: drop-shadow(0 15px 20px rgba(255, 204, 0, 0.6));
+      animation: floating-title 4s infinite alternate ease-in-out, pulse 5s infinite;
+    }
+
+    .subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 5rem;
+      color: #fff;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-shadow: 0px 10px 30px rgba(255, 71, 87, 0.7), 0 0 50px rgba(255, 71, 87, 0.5);
+      background: linear-gradient(90deg, #e5b240, #ff4757, #ffcc00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateZ(60px) rotateX(-15deg) rotateY(10deg);
+      animation: floating-subtitle 5s infinite alternate ease-in-out, glow 6s infinite;
+    }
+
+    .promo {
+      margin-top: 30px;
+      font-size: 1.7rem;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 15px 25px rgba(255, 255, 255, 0.3);
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 3rem;
+      margin-top: 30px;
+      background: linear-gradient(45deg, #e5b240, #ff4757);
+      color: #151932;
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      border-radius: 30px;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(229, 178, 64, 0.8), 0 15px 40px rgba(255, 71, 87, 0.5);
+      transition: all 0.4s ease;
+      animation: pulse 3s infinite;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-7px) scale(1.15);
+      background: linear-gradient(45deg, #ff4757, #e5b240);
+      box-shadow: 0 15px 40px rgba(255, 71, 87, 0.8), 0 20px 50px rgba(229, 178, 64, 0.7);
+      color: #fff;
+    }
+
+    .particle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.8;
+      mix-blend-mode: screen;
+      filter: blur(2px);
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-150px) scale(0.5);
+      }
+    }
+
+    @keyframes floating-title {
+      from {
+        transform: translateZ(100px) translateY(-10px) rotateX(10deg) rotateY(-10deg);
+      }
+      to {
+        transform: translateZ(100px) translateY(10px) rotateX(-10deg) rotateY(10deg);
+      }
+    }
+
+    @keyframes floating-subtitle {
+      from {
+        transform: translateZ(60px) translateY(-10px) rotateX(-15deg) rotateY(10deg);
+      }
+      to {
+        transform: translateZ(60px) translateY(10px) rotateX(15deg) rotateY(-10deg);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0px 0px 20px rgba(255, 71, 87, 0.7), 0 0 30px rgba(255, 71, 87, 0.5);
+      }
+      50% {
+        text-shadow: 0px 0px 40px rgba(255, 204, 0, 0.9), 0 0 60px rgba(255, 71, 87, 0.6);
+      }
+      100% {
+        text-shadow: 0px 0px 20px rgba(255, 71, 87, 0.7), 0 0 30px rgba(255, 204, 0, 0.5);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://www.scillacariddirentalboat.it/wp-content/uploads/2024/10/logo-1.png" alt="Gladiators Battle Logo" class="logo">
+    </div>
+    <div class="text-art">
+      <h1 class="title">SCILLA CARIDDI</h1>
+      <h2 class="subtitle">RENTAL BOAT </h2>
+      <p class="promo">Vivi le emozioni uniche nello Stretto di Messina</p>
+      <a href="https://www.scillacariddirentalboat.it/" target="_blank" class="cta-button">Prenota ora</a>
+    </div>
+  </div>
+  <script>
+    const container = document.querySelector('.container');
+    const ctaButton = document.querySelector('.cta-button');
+    const textArt = document.querySelector('.text-art');
+    const title = document.querySelector('.title');
+
+    ctaButton.addEventListener('mouseover', () => {
+      container.style.transition = 'background 0.5s';
+      container.style.background = 'linear-gradient(135deg, #151932, #0b0f3a)';
+    });
+
+    ctaButton.addEventListener('mouseout', () => {
+      container.style.background = 'linear-gradient(135deg, #0b0f3a, #151932)';
+    });
+
+    const particleContainer = document.createElement('div');
+    particleContainer.classList.add('particle-container');
+    document.body.appendChild(particleContainer);
+
+    const createParticle = (x, y) => {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = ${x}px;
+      particle.style.top = ${y}px;
+      const size = Math.random() * 6 + 4;
+      particle.style.width = ${size}px;
+      particle.style.height = ${size}px;
+      const colors = ['#ffcc00', '#ff4700', '#e5b240', '#ff4757'];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const randomX = Math.random() * 40 - 20;
+      const randomY = Math.random() * -100 - 50;
+      const duration = Math.random() * 1.5 + 1;
+      particle.style.animation = floatUp ${duration}s ease-out forwards;
+      particle.style.transform = translate(${randomX}px, ${randomY}px);
+      particleContainer.appendChild(particle);
+      particle.addEventListener('animationend', () => {
+        particle.remove();
+      });
+    };
+
+    container.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      createParticle(clientX, clientY);
+    });
+
+    const animateEntry = () => {
+      textArt.style.opacity = '0';
+      textArt.style.transform = 'translateY(50px)';
+      textArt.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+
+      setTimeout(() => {
+        textArt.style.opacity = '1';
+        textArt.style.transform = 'translateY(0)';
+      }, 200);
+
+      const logo = document.querySelector('.logo');
+      logo.style.opacity = '0';
+      logo.style.transform = 'scale(0.8)';
+      logo.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+
+      setTimeout(() => {
+        logo.style.opacity = '1';
+        logo.style.transform = 'scale(1)';
+      }, 400);
+
+      setTimeout(() => {
+        const dynamicText = document.createElement('h2');
+        dynamicText.textContent = 'Scilla Cariddi Rental Boat ';
+        dynamicText.style.color = 'orange';
+        dynamicText.style.fontSize = '2rem';
+        dynamicText.style.textShadow = '0 0 15px rgba(255, 255, 255, 0.7)';
+        container.appendChild(dynamicText);
+      }, 2500);
+    };
+
+    window.addEventListener('load', animateEntry);
+  </script>
+</body>
+</html>
